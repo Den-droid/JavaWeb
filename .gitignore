@@ -1,0 +1,5 @@
+# removing ide files
+.idea/
+
+# removing out files
+out/
