@@ -11,9 +11,9 @@ public class FrontController {
     private final ApplicantController applicantController;
 
     public FrontController() {
-        this.userController = new UserController();
-        this.adminController = new AdminController();
-        this.applicantController = new ApplicantController();
+        this.userController = UserController.getInstance();
+        this.adminController = AdminController.getInstance();
+        this.applicantController = ApplicantController.getInstance();
     }
 
     public void mainMenu() {

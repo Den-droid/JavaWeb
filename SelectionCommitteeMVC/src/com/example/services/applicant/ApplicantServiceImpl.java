@@ -11,12 +11,20 @@ import com.example.models.RegisterModel;
 import java.sql.SQLException;
 
 public class ApplicantServiceImpl implements ApplicantService {
+    private static ApplicantServiceImpl instance;
     private final ApplicantDao applicantDao;
     private final UserDao userDao;
 
-    public ApplicantServiceImpl() {
-        this.applicantDao = new ApplicantDaoImpl();
-        this.userDao = new UserDaoImpl();
+    public static ApplicantServiceImpl getInstance() {
+        if (instance == null) {
+            instance = new ApplicantServiceImpl();
+        }
+        return instance;
+    }
+
+    private ApplicantServiceImpl() {
+        this.applicantDao = ApplicantDaoImpl.getInstance();
+        this.userDao = UserDaoImpl.getInstance();
     }
 
     @Override

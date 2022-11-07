@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FacultyCoefficientDaoImpl implements FacultyCoefficientDao {
+    private static FacultyCoefficientDaoImpl instance;
     private final String user;
     private final String password;
     private final String url;
@@ -23,7 +24,14 @@ public class FacultyCoefficientDaoImpl implements FacultyCoefficientDao {
     private static final String SELECT_BY_FACULTY_AND_SUBJECT_ID = "select * from faculties_coefficients where " +
             "faculty_id = ? and subject_id = ?";
 
-    public FacultyCoefficientDaoImpl() {
+    public static FacultyCoefficientDaoImpl getInstance() {
+        if (instance == null) {
+            instance = new FacultyCoefficientDaoImpl();
+        }
+        return instance;
+    }
+
+    private FacultyCoefficientDaoImpl() {
         this.user = System.getenv("MYSQL_USERNAME");
         this.password = System.getenv("MYSQL_PASSWORD");
         this.url = "jdbc:mysql://" + System.getenv("MYSQL_HOST") + "/selection_committee";

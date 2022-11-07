@@ -2,6 +2,8 @@ package com.example.services.faculty;
 
 import com.example.dao.faculty.FacultyDao;
 import com.example.dao.faculty.FacultyDaoImpl;
+import com.example.dao.university.UniversityDao;
+import com.example.dao.university.UniversityDaoImpl;
 import com.example.entities.Faculty;
 import com.example.sorters.FacultySorter;
 
@@ -11,10 +13,18 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class FacultyServiceImpl implements FacultyService {
+    private static FacultyServiceImpl instance;
     private final FacultyDao facultyDao;
 
-    public FacultyServiceImpl() {
-        this.facultyDao = new FacultyDaoImpl();
+    public static FacultyServiceImpl getInstance() {
+        if (instance == null) {
+            instance = new FacultyServiceImpl();
+        }
+        return instance;
+    }
+
+    private FacultyServiceImpl() {
+        this.facultyDao = FacultyDaoImpl.getInstance();
     }
 
     @Override

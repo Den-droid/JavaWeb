@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MarkDaoImpl implements MarkDao {
+    private static MarkDaoImpl instance;
     private final String user;
     private final String password;
     private final String url;
@@ -18,7 +19,14 @@ public class MarkDaoImpl implements MarkDao {
     private static final String SELECT_BY_USER_AND_SUBJECT_ID = "select * from marks where " +
             "user_id = ? and subject_id = ?";
 
-    public MarkDaoImpl() {
+    public static MarkDaoImpl getInstance() {
+        if (instance == null) {
+            instance = new MarkDaoImpl();
+        }
+        return instance;
+    }
+
+    private MarkDaoImpl() {
         this.user = System.getenv("MYSQL_USERNAME");
         this.password = System.getenv("MYSQL_PASSWORD");
         this.url = "jdbc:mysql://" + System.getenv("MYSQL_HOST") + "/selection_committee";

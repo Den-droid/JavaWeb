@@ -10,11 +10,18 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class MarkServiceImpl implements MarkService {
+    private static MarkServiceImpl instance;
 
     private final MarkDao dao;
 
-    public MarkServiceImpl() {
-        this.dao = new MarkDaoImpl();
+    private MarkServiceImpl() {
+        this.dao = MarkDaoImpl.getInstance();
+    }
+
+    public static MarkServiceImpl getInstance() {
+        if (instance == null)
+            instance = new MarkServiceImpl();
+        return instance;
     }
 
     @Override

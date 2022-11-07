@@ -17,14 +17,22 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ApplicantAssignServiceImpl implements ApplicantAssignService {
+    private static ApplicantAssignServiceImpl instance;
+
     private final FacultyCoefficientDao facultyCoefficientDao;
     private final ApplicantAssignDao applicantAssignDao;
     private final MarkDao markDao;
 
-    public ApplicantAssignServiceImpl() {
-        this.applicantAssignDao = new ApplicantAssignDaoImpl();
-        this.facultyCoefficientDao = new FacultyCoefficientDaoImpl();
-        this.markDao = new MarkDaoImpl();
+    private ApplicantAssignServiceImpl() {
+        this.applicantAssignDao = ApplicantAssignDaoImpl.getInstance();
+        this.facultyCoefficientDao = FacultyCoefficientDaoImpl.getInstance();
+        this.markDao = MarkDaoImpl.getInstance();
+    }
+
+    public static ApplicantAssignServiceImpl getInstance() {
+        if (instance == null)
+            instance = new ApplicantAssignServiceImpl();
+        return instance;
     }
 
     @Override
@@ -50,7 +58,7 @@ public class ApplicantAssignServiceImpl implements ApplicantAssignService {
     }
 
     @Override
-    public List<Integer> getFacultyIdsFromApplicantAssigns(List<ApplicantAssign> assigns) {
+    public List<Integer> getFacultyIdsFromApplicantAssigns(List<ApplicantAssign> assigns) throws SQLException {
         return assigns.stream()
                 .map(ApplicantAssign::getFacultyId)
                 .distinct()

@@ -11,7 +11,7 @@ public interface ApplicantAssignService {
 
     List<ApplicantAssign> getByUserId(int userId) throws SQLException;
 
-    List<Integer> getFacultyIdsFromApplicantAssigns(List<ApplicantAssign> assigns);
+    List<Integer> getFacultyIdsFromApplicantAssigns(List<ApplicantAssign> assigns) throws SQLException;
 
     boolean isFacultyAssigned(Faculty faculty, int userId) throws SQLException;
 }

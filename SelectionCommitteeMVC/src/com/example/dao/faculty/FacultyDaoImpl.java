@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FacultyDaoImpl implements FacultyDao {
+    private static FacultyDaoImpl instance;
     private final String user;
     private final String password;
     private final String url;
@@ -27,7 +28,14 @@ public class FacultyDaoImpl implements FacultyDao {
 
     private static final String SELECT_BY_ID = "select * from faculties where id = ?";
 
-    public FacultyDaoImpl() {
+    public static FacultyDaoImpl getInstance() {
+        if (instance == null) {
+            instance = new FacultyDaoImpl();
+        }
+        return instance;
+    }
+
+    private FacultyDaoImpl() {
         this.user = System.getenv("MYSQL_USERNAME");
         this.password = System.getenv("MYSQL_PASSWORD");
         this.url = "jdbc:mysql://" + System.getenv("MYSQL_HOST") + "/selection_committee";

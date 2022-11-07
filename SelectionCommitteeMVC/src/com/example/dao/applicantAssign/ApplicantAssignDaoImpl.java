@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ApplicantAssignDaoImpl implements ApplicantAssignDao {
+    private static ApplicantAssignDaoImpl instance;
     private final String user;
     private final String password;
     private final String url;
@@ -18,7 +19,14 @@ public class ApplicantAssignDaoImpl implements ApplicantAssignDao {
     private static final String SELECT_BY_USER_ID = "select * from applicants_assigned where user_id = ?";
     private static final String SELECT_BY_FACULTY_ID = "select * from applicants_assigned where faculty_id = ?";
 
-    public ApplicantAssignDaoImpl() {
+    public static ApplicantAssignDaoImpl getInstance() {
+        if (instance == null) {
+            instance = new ApplicantAssignDaoImpl();
+        }
+        return instance;
+    }
+
+    private ApplicantAssignDaoImpl() {
         this.user = System.getenv("MYSQL_USERNAME");
         this.password = System.getenv("MYSQL_PASSWORD");
         this.url = "jdbc:mysql://" + System.getenv("MYSQL_HOST") + "/selection_committee";
