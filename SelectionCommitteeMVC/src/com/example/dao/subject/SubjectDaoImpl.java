@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SubjectDaoImpl implements SubjectDao {
-    private static SubjectDaoImpl instance;
     private final String user;
     private final String password;
     private final String url;
@@ -17,14 +16,7 @@ public class SubjectDaoImpl implements SubjectDao {
     private static final String SELECT_BY_NAME = "select * from subjects where name = ?";
     private static final String SELECT_ALL = "select * from subjects";
 
-    public static SubjectDaoImpl getInstance(){
-        if (instance == null) {
-            instance = new SubjectDaoImpl();
-        }
-        return instance;
-    }
-
-    private SubjectDaoImpl() {
+    public SubjectDaoImpl() {
         this.user = System.getenv("MYSQL_USERNAME");
         this.password = System.getenv("MYSQL_PASSWORD");
         this.url = "jdbc:mysql://" + System.getenv("MYSQL_HOST") + "/selection_committee";

@@ -6,22 +6,14 @@ import com.example.enums.UserRole;
 import com.example.views.MainMenu;
 
 public class FrontController {
-    private static FrontController instance;
     private final UserController userController;
     private final AdminController adminController;
     private final ApplicantController applicantController;
 
-    private FrontController() {
-        this.userController = UserController.getInstance();
-        this.adminController = AdminController.getInstance();
-        this.applicantController = ApplicantController.getInstance();
-    }
-
-    public static FrontController getInstance() {
-        if (instance == null) {
-            instance = new FrontController();
-        }
-        return instance;
+    public FrontController() {
+        this.userController = new UserController();
+        this.adminController = new AdminController();
+        this.applicantController = new ApplicantController();
     }
 
     public void mainMenu() {

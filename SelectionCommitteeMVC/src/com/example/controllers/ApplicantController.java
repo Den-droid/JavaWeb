@@ -23,7 +23,6 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 public class ApplicantController {
-    private static ApplicantController instance;
     private final ApplicantService applicantService;
     private final FacultyService facultyService;
     private final UniversityService universityService;
@@ -33,21 +32,14 @@ public class ApplicantController {
     private final ApplicantEnrollResultService enrollService;
     private Applicant applicant;
 
-    private ApplicantController() {
-        this.applicantService = ApplicantServiceImpl.getInstance();
-        this.applicantAssignService = ApplicantAssignServiceImpl.getInstance();
-        this.facultyService = FacultyServiceImpl.getInstance();
-        this.universityService = UniversityServiceImpl.getInstance();
-        this.markService = MarkServiceImpl.getInstance();
-        this.subjectService = SubjectServiceImpl.getInstance();
-        this.enrollService = ApplicantEnrollResultServiceImpl.getInstance();
-    }
-
-    public static ApplicantController getInstance() {
-        if (instance == null) {
-            instance = new ApplicantController();
-        }
-        return instance;
+    public ApplicantController() {
+        this.applicantService = new ApplicantServiceImpl();
+        this.universityService = new UniversityServiceImpl();
+        this.facultyService = new FacultyServiceImpl();
+        this.subjectService = new SubjectServiceImpl();
+        this.applicantAssignService = new ApplicantAssignServiceImpl();
+        this.markService = new MarkServiceImpl();
+        this.enrollService = new ApplicantEnrollResultServiceImpl();
     }
 
     public void mainMenu(Applicant applicant) {

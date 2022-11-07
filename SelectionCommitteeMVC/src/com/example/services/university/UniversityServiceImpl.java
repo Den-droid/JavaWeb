@@ -9,18 +9,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class UniversityServiceImpl implements UniversityService {
-    private static UniversityServiceImpl instance;
     private final UniversityDao dao;
 
-    public static UniversityServiceImpl getInstance() {
-        if (instance == null) {
-            instance = new UniversityServiceImpl();
-        }
-        return instance;
-    }
-
-    private UniversityServiceImpl() {
-        this.dao = UniversityDaoImpl.getInstance();
+    public UniversityServiceImpl() {
+        this.dao = new UniversityDaoImpl();
     }
 
     @Override

@@ -19,7 +19,7 @@ public interface FacultyService {
 
     List<Faculty> getByIds(List<Integer> ids) throws SQLException;
 
-    List<Integer> getUniversityIdsFromFaculties(List<Faculty> faculties) throws SQLException;
+    List<Integer> getUniversityIdsFromFaculties(List<Faculty> faculties);
 
     Faculty getByNameAndUniversityId(int universityId, String name) throws SQLException;
 }

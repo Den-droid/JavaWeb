@@ -13,5 +13,5 @@ public interface SubjectService {
 
     Subject getByName(String name) throws SQLException;
 
-    List<Subject> getMissingSubjectsFromMarkList(List<Mark> marks, List<Subject> allSubjects) throws SQLException;
+    List<Subject> getMissingSubjectsFromMarkList(List<Mark> marks, List<Subject> allSubjects);
 }

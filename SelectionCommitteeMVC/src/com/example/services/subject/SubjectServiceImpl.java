@@ -10,18 +10,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class SubjectServiceImpl implements SubjectService {
-    private static SubjectServiceImpl instance;
     private final SubjectDao dao;
 
-    public static SubjectServiceImpl getInstance() {
-        if (instance == null) {
-            instance = new SubjectServiceImpl();
-        }
-        return instance;
-    }
-
-    private SubjectServiceImpl() {
-        this.dao = SubjectDaoImpl.getInstance();
+    public SubjectServiceImpl() {
+        this.dao = new SubjectDaoImpl();
     }
 
     @Override
@@ -41,7 +33,7 @@ public class SubjectServiceImpl implements SubjectService {
 
     @Override
     public List<Subject> getMissingSubjectsFromMarkList(List<Mark> marks,
-                                                        List<Subject> allSubjects) throws SQLException {
+                                                        List<Subject> allSubjects) {
         return allSubjects.stream()
                 .filter(x -> marks.stream()
                         .noneMatch(y -> y.getSubjectId() == x.getId()))

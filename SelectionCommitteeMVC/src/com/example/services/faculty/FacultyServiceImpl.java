@@ -2,8 +2,6 @@ package com.example.services.faculty;
 
 import com.example.dao.faculty.FacultyDao;
 import com.example.dao.faculty.FacultyDaoImpl;
-import com.example.dao.university.UniversityDao;
-import com.example.dao.university.UniversityDaoImpl;
 import com.example.entities.Faculty;
 import com.example.sorters.FacultySorter;
 
@@ -13,20 +11,10 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class FacultyServiceImpl implements FacultyService {
-    private static FacultyServiceImpl instance;
     private final FacultyDao facultyDao;
-    private final UniversityDao universityDao;
 
-    public static FacultyServiceImpl getInstance() {
-        if (instance == null) {
-            instance = new FacultyServiceImpl();
-        }
-        return instance;
-    }
-
-    private FacultyServiceImpl() {
-        this.facultyDao = FacultyDaoImpl.getInstance();
-        this.universityDao = UniversityDaoImpl.getInstance();
+    public FacultyServiceImpl() {
+        this.facultyDao = new FacultyDaoImpl();
     }
 
     @Override
@@ -75,7 +63,7 @@ public class FacultyServiceImpl implements FacultyService {
     }
 
     @Override
-    public List<Integer> getUniversityIdsFromFaculties(List<Faculty> faculties) throws SQLException {
+    public List<Integer> getUniversityIdsFromFaculties(List<Faculty> faculties) {
         return faculties.stream()
                 .map(Faculty::getUniversityId)
                 .distinct()

@@ -6,7 +6,6 @@ import com.example.entities.Applicant;
 import java.sql.*;
 
 public class ApplicantDaoImpl implements ApplicantDao {
-    private static ApplicantDaoImpl instance;
     private final String user;
     private final String password;
     private final String url;
@@ -16,17 +15,10 @@ public class ApplicantDaoImpl implements ApplicantDao {
 
     private static final String SELECT_BY_USER_ID = "select * from applicants where user_id = ?";
 
-    private ApplicantDaoImpl() {
+    public ApplicantDaoImpl() {
         this.user = System.getenv("MYSQL_USERNAME");
         this.password = System.getenv("MYSQL_PASSWORD");
         this.url = "jdbc:mysql://" + System.getenv("MYSQL_HOST") + "/selection_committee";
-    }
-
-    public static ApplicantDaoImpl getInstance() {
-        if (instance == null) {
-            instance = new ApplicantDaoImpl();
-        }
-        return instance;
     }
 
     @Override

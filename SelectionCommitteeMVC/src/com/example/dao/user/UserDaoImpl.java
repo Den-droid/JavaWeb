@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserDaoImpl implements UserDao {
-    private static UserDaoImpl instance;
     private final String user;
     private final String password;
     private final String url;
@@ -24,14 +23,7 @@ public class UserDaoImpl implements UserDao {
     private final static String SELECT_BY_ROLE = "select * from users where role = ?";
     private final static String UPDATE_USER_IS_BLOCKED = "update users set blocked = ? where id = ?";
 
-    public static UserDaoImpl getInstance() {
-        if (instance == null) {
-            instance = new UserDaoImpl();
-        }
-        return instance;
-    }
-
-    private UserDaoImpl() {
+    public UserDaoImpl() {
         this.user = System.getenv("MYSQL_USERNAME");
         this.password = System.getenv("MYSQL_PASSWORD");
         this.url = "jdbc:mysql://" + System.getenv("MYSQL_HOST") + "/selection_committee";

@@ -20,7 +20,6 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class ApplicantEnrollResultServiceImpl implements ApplicantEnrollResultService {
-    private static ApplicantEnrollResultServiceImpl instance;
 
     private final ApplicantEnrollResultDao enrollDao;
 
@@ -30,18 +29,12 @@ public class ApplicantEnrollResultServiceImpl implements ApplicantEnrollResultSe
     private final FacultyCoefficientDao coefficientDao;
     private final FacultyDao facultyDao;
 
-    private ApplicantEnrollResultServiceImpl() {
-        this.enrollDao = ApplicantEnrollResultDaoImpl.getInstance();
-        this.assignDao = ApplicantAssignDaoImpl.getInstance();
-        this.markDao = MarkDaoImpl.getInstance();
-        this.coefficientDao = FacultyCoefficientDaoImpl.getInstance();
-        this.facultyDao = FacultyDaoImpl.getInstance();
-    }
-
-    public static ApplicantEnrollResultServiceImpl getInstance() {
-        if (instance == null)
-            instance = new ApplicantEnrollResultServiceImpl();
-        return instance;
+    public ApplicantEnrollResultServiceImpl() {
+        this.enrollDao = new ApplicantEnrollResultDaoImpl();
+        this.assignDao = new ApplicantAssignDaoImpl();
+        this.markDao = new MarkDaoImpl();
+        this.coefficientDao = new FacultyCoefficientDaoImpl();
+        this.facultyDao = new FacultyDaoImpl();
     }
 
     @Override

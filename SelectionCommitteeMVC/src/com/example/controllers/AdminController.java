@@ -23,7 +23,6 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class AdminController {
-    private static AdminController instance;
     private final UserService userService;
     private final UniversityService universityService;
     private final FacultyService facultyService;
@@ -34,21 +33,14 @@ public class AdminController {
     private final ApplicantEnrollResultService enrollService;
     private User currentUser;
 
-    private AdminController() {
-        this.userService = UserServiceImpl.getInstance();
-        this.universityService = UniversityServiceImpl.getInstance();
-        this.facultyService = FacultyServiceImpl.getInstance();
-        this.subjectService = SubjectServiceImpl.getInstance();
-        this.facultyCoefficientService = FacultyCoefficientServiceImpl.getInstance();
-        this.markService = MarkServiceImpl.getInstance();
-        this.enrollService = ApplicantEnrollResultServiceImpl.getInstance();
-    }
-
-    public static AdminController getInstance() {
-        if (instance == null) {
-            instance = new AdminController();
-        }
-        return instance;
+    public AdminController() {
+        this.userService = new UserServiceImpl();
+        this.universityService = new UniversityServiceImpl();
+        this.facultyService = new FacultyServiceImpl();
+        this.subjectService = new SubjectServiceImpl();
+        this.facultyCoefficientService = new FacultyCoefficientServiceImpl();
+        this.markService = new MarkServiceImpl();
+        this.enrollService = new ApplicantEnrollResultServiceImpl();
     }
 
     public void mainMenu(User user) {

@@ -8,18 +8,10 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class FacultyCoefficientServiceImpl implements FacultyCoefficientService {
-    private static FacultyCoefficientServiceImpl instance;
     private final FacultyCoefficientDao dao;
 
-    private FacultyCoefficientServiceImpl() {
-        this.dao = FacultyCoefficientDaoImpl.getInstance();
-    }
-
-
-    public static FacultyCoefficientServiceImpl getInstance() {
-        if (instance == null)
-            instance = new FacultyCoefficientServiceImpl();
-        return instance;
+    public FacultyCoefficientServiceImpl() {
+        this.dao = new FacultyCoefficientDaoImpl();
     }
 
     @Override

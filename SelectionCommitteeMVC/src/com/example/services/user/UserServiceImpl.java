@@ -13,18 +13,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class UserServiceImpl implements UserService {
-    private static UserServiceImpl instance;
     private final UserDao dao;
 
-    public static UserServiceImpl getInstance() {
-        if (instance == null) {
-            instance = new UserServiceImpl();
-        }
-        return instance;
-    }
-
-    private UserServiceImpl() {
-        this.dao = UserDaoImpl.getInstance();
+    public UserServiceImpl() {
+        this.dao = new UserDaoImpl();
     }
 
     @Override

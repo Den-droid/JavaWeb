@@ -21,22 +21,14 @@ import java.util.List;
 import java.util.Scanner;
 
 public class UserController {
-    private static UserController instance;
     private final UserService userService;
     private final FacultyService facultyService;
     private final ApplicantService applicantService;
 
-    private UserController() {
-        this.userService = UserServiceImpl.getInstance();
-        this.facultyService = FacultyServiceImpl.getInstance();
-        this.applicantService = ApplicantServiceImpl.getInstance();
-    }
-
-    public static UserController getInstance() {
-        if (instance == null) {
-            instance = new UserController();
-        }
-        return instance;
+    public UserController() {
+        this.userService = new UserServiceImpl();
+        this.facultyService = new FacultyServiceImpl();
+        this.applicantService = new ApplicantServiceImpl();
     }
 
     public User login() {

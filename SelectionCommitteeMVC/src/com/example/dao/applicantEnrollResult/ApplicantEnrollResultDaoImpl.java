@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ApplicantEnrollResultDaoImpl implements ApplicantEnrollResultDao {
-    private static ApplicantEnrollResultDaoImpl instance;
     private final String user;
     private final String password;
     private final String url;
@@ -21,14 +20,7 @@ public class ApplicantEnrollResultDaoImpl implements ApplicantEnrollResultDao {
     private static final String SELECT_BY_EDUCATION_FORM = "select * from applicants_enroll_results" +
             " where form = ?";
 
-    public static ApplicantEnrollResultDaoImpl getInstance() {
-        if (instance == null) {
-            instance = new ApplicantEnrollResultDaoImpl();
-        }
-        return instance;
-    }
-
-    private ApplicantEnrollResultDaoImpl() {
+    public ApplicantEnrollResultDaoImpl() {
         this.user = System.getenv("MYSQL_USERNAME");
         this.password = System.getenv("MYSQL_PASSWORD");
         this.url = "jdbc:mysql://" + System.getenv("MYSQL_HOST") + "/selection_committee";
